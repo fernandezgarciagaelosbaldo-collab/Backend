@@ -19,9 +19,7 @@ public partial class SistemaProduccionContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=LAPTOP-L4A82724\\SQLEXPRESS;Database=SistemaProduccion;Trusted_Connection=True;TrustServerCertificate=True;");
-
+   
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Rol>(entity =>
