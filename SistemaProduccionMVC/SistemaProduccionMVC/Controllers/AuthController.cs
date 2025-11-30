@@ -6,7 +6,7 @@ using BCrypt.Net;
 
 namespace SistemaProduccionMVC.Controllers
 {
-    [Route("[controller]")]
+   /* [Route("[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -153,4 +153,5 @@ namespace SistemaProduccionMVC.Controllers
             return Ok(new { message = "Usuario eliminado correctamente" });
         }
     }
+   */
 }

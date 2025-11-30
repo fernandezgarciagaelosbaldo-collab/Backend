@@ -4,7 +4,7 @@ using SistemaProduccionMVC.Models;
 
 namespace SistemaProduccionMVC.Controllers
 {
-    public class HomeController : Controller
+   /* public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -28,5 +28,5 @@ namespace SistemaProduccionMVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-namespace SistemaProduccionMVC.Models
+﻿namespace SistemaProduccionMVC.Models
 {
     public class ErrorViewModel
     {
@@ -7,3 +7,4 @@ namespace SistemaProduccionMVC.Models
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
+

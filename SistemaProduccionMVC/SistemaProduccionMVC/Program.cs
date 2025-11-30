@@ -12,8 +12,8 @@ namespace SistemaProduccionMVC
             // 1. Conexión a SQL Server (SmarterASP)
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-            builder.Services.AddDbContext<SistemaProduccionContext>(options =>
-                options.UseSqlServer(connectionString));
+           /* builder.Services.AddDbContext<SistemaProduccionContext>(options =>
+                options.UseSqlServer(connectionString));*/
 
             // 2. Activar controladores API
             builder.Services.AddControllers();
