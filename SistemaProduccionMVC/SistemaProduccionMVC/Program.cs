@@ -9,21 +9,21 @@ namespace SistemaProduccionMVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // 1. Conexión a SQL Server (SmarterASP)
+            // 1. Conexión a SQL Server (local o SmarterASP)
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-           /* builder.Services.AddDbContext<SistemaProduccionContext>(options =>
-                options.UseSqlServer(connectionString));*/
+            builder.Services.AddDbContext<ProduccionDbContext>(options =>
+                options.UseSqlServer(connectionString));
 
             // 2. Activar controladores API
             builder.Services.AddControllers();
 
-            // 3. Configurar CORS (por ahora abierto para pruebas)
+            // 3. Configurar CORS (abierto para desarrollo)
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("CorsPermitirTodo", policy =>
                 {
-                    policy.AllowAnyOrigin()      //  solo para pruebas
+                    policy.AllowAnyOrigin()
                           .AllowAnyMethod()
                           .AllowAnyHeader();
                 });
@@ -31,22 +31,21 @@ namespace SistemaProduccionMVC
 
             var app = builder.Build();
 
-            // 4. Middleware básico
+            // 4. Middleware esencial
             app.UseHttpsRedirection();
 
-            // 5. Activar CORS
+            // 5. Habilitar CORS
             app.UseCors("CorsPermitirTodo");
 
-            // 6. Routing
             app.UseRouting();
 
+            // 6. Autorización (si después agregas JWT seguirá funcionando)
             app.UseAuthorization();
 
-           //Mapear solo controladores API
+            // 7. Mapear solo controladores API
             app.MapControllers();
 
             app.Run();
         }
     }
 }
-
