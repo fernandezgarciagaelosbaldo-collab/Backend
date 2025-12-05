@@ -90,20 +90,19 @@ namespace SistemaProduccionMVC.Controllers
         // POST: /scrap
         // Crea un nuevo registro de scrap
         // =====================================================
+
         [HttpPost]
         public IActionResult CrearScrap([FromBody] ScrapCreateRequest request)
         {
             try
             {
-                // Validaciones básicas
-                if (string.IsNullOrWhiteSpace(request.Linea))
-                    return BadRequest(new { error = "La línea es obligatoria" });
+                // ✅ Validar DTO con DataAnnotations
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
-                if (request.Cantidad <= 0)
-                    return BadRequest(new { error = "La cantidad debe ser mayor a cero" });
-
-                if (request.CostoUnitario <= 0)
-                    return BadRequest(new { error = "El costo unitario debe ser mayor a cero" });
+                // (Opcional) Puedes quitar estas si ya confías en las anotaciones:
+                // if (string.IsNullOrWhiteSpace(request.Linea))
+                //     return BadRequest(new { error = "La línea es obligatoria" });
 
                 var nuevo = new RegistrosScrap
                 {
@@ -113,7 +112,7 @@ namespace SistemaProduccionMVC.Controllers
                     Cantidad = request.Cantidad,
                     CostoUnitario = request.CostoUnitario,
                     UsuarioReporta = request.UsuarioReporta
-                    // FechaHora y CostoTotal los calcula la BD (según tu OnModelCreating)
+                    // FechaHora y CostoTotal los calcula la BD
                 };
 
                 _context.RegistrosScraps.Add(nuevo);
@@ -130,6 +129,7 @@ namespace SistemaProduccionMVC.Controllers
                 return StatusCode(500, new { error = "Error al registrar scrap", detalle = ex.Message });
             }
         }
+
 
         // =====================================================
         // DELETE: /scrap/{id}

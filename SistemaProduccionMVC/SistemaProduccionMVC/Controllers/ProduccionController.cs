@@ -80,8 +80,9 @@ namespace SistemaProduccionMVC.Controllers
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(request.Codigo))
-                    return BadRequest(new { error = "El código es obligatorio" });
+                // ✅ Validar DTO con DataAnnotations
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
                 var nueva = new OrdenesProduccion
                 {
@@ -105,6 +106,7 @@ namespace SistemaProduccionMVC.Controllers
             }
         }
 
+
         // =====================================================
         // PUT: /produccion/ordenes/{id}
         // =====================================================
@@ -113,6 +115,10 @@ namespace SistemaProduccionMVC.Controllers
         {
             try
             {
+                // ✅ Validar DTO con DataAnnotations
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
                 var orden = _context.OrdenesProduccions.FirstOrDefault(o => o.IdOrden == id);
 
                 if (orden == null)
@@ -131,6 +137,7 @@ namespace SistemaProduccionMVC.Controllers
                 return StatusCode(500, new { error = "Error al actualizar la orden", detalle = ex.Message });
             }
         }
+
 
         // =====================================================
         // DELETE: /produccion/ordenes/{id}

@@ -56,6 +56,10 @@ namespace SistemaProduccionMVC.Controllers
         {
             try
             {
+                // Validar DTO con DataAnnotations
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
                 if (_context.Usuarios.Any(u => u.Correo == request.Correo))
                     return BadRequest(new { error = "El correo ya está registrado" });
 
@@ -83,7 +87,6 @@ namespace SistemaProduccionMVC.Controllers
                 return StatusCode(500, new { error = "Error al registrar usuario", detalle = ex.Message });
             }
         }
-
         // LISTAR USUARIOS
         [HttpGet("usuarios")]
         public IActionResult GetUsuarios()
